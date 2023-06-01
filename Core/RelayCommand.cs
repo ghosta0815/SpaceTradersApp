@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace SpaceTradersApp.Core;
 
-class RelayCommand : ICommand
+public class RelayCommand : ICommand
 {
     private Action<Object> _execute;
     private Func<Object, bool> _canExecute;

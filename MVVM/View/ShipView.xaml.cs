@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using SpaceTradersApp.MVVM.ViewModel;
+using System.Windows.Controls;
 
 namespace SpaceTradersApp.MVVM.View;
 
@@ -7,8 +8,9 @@ namespace SpaceTradersApp.MVVM.View;
 /// </summary>
 public partial class ShipView : UserControl
 {
-    public ShipView()
+    public ShipView(ShipViewModel vm)
     {
+        DataContext = vm;
         InitializeComponent();
     }
 }

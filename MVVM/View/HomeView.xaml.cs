@@ -1,4 +1,6 @@
-﻿using System.Windows.Controls;
+﻿using SpaceTradersApp.Core;
+using SpaceTradersApp.MVVM.ViewModel;
+using System.Windows.Controls;
 
 namespace SpaceTradersApp.MVVM.View;
 
@@ -7,8 +9,9 @@ namespace SpaceTradersApp.MVVM.View;
 /// </summary>
 public partial class HomeView : UserControl
 {
-    public HomeView()
+    public HomeView(HomeViewModel vm)
     {
+        DataContext = vm;
         InitializeComponent();
     }
 }

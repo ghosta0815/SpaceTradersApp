@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SpaceTradersApp.MVVM.ViewModel;
 
-class HomeViewModel : ObservableObject
+public class HomeViewModel : ObservableObject
 {
     public RelayCommand ContinueGameCommand { get; set; }
 

@@ -1,5 +1,5 @@
 ﻿namespace SpaceTradersApp.MVVM.ViewModel;
 
-class ShipViewModel
+public class ShipViewModel
 {
 }

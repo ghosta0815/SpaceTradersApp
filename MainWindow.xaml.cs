@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using SpaceTradersApp.MVVM.ViewModel;
+using System.Windows;
 
 namespace SpaceTradersApp;
 
@@ -7,8 +8,9 @@ namespace SpaceTradersApp;
 /// </summary>
 public partial class MainWindow : Window
 {
-    public MainWindow()
+    public MainWindow(MainWindowViewModel vm)
     {
+        DataContext = vm;
         InitializeComponent();
     }
 }

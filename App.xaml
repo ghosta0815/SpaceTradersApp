@@ -15,9 +15,9 @@
             <DataTemplate DataType="{x:Type ViewModel:ShipViewModel}">
                 <View:ShipView/>
             </DataTemplate>
-            <DataTemplate DataType="{x:Type ViewModel:HomeViewModel}">
+            <!--DataTemplate DataType="{x:Type ViewModel:HomeViewModel}">
                 <View:HomeView/>
-            </DataTemplate>
+            </DataTemplate-->
         </ResourceDictionary>
     </Application.Resources>
 </Application>

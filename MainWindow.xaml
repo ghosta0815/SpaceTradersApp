@@ -11,9 +11,6 @@
         ResizeMode="NoResize"
         Background="Transparent"
         AllowsTransparency="True">
-    <Window.DataContext>
-        <ViewModel:MainViewModel/>
-    </Window.DataContext>
     <Border Background="{StaticResource BackgroundMainBrush}"
             CornerRadius="20"
             ClipToBounds="True"
@@ -83,7 +80,7 @@
                    Foreground="White"
                    Grid.Column="0"/>
 
-                <TextBlock Text="Balance: 400C"
+                <TextBlock Text="{Binding Balance}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Right"
                    FontSize="22"
