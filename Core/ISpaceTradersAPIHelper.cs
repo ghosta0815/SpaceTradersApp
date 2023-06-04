@@ -5,6 +5,15 @@ namespace SpaceTradersApp.Core
 {
     public interface ISpaceTradersAPIHelper
     {
-        Task<AccountModel?> getAccountDataAsync();
+        /// <summary>
+        /// Sets the token for the API Calls
+        /// </summary>
+        public string Token { get; set; }
+
+        /// <summary>
+        /// Gets the Account Data
+        /// </summary>
+        /// <returns></returns>
+        Task<AccountModelResponse?> getAccountDataAsync();
     }
 }

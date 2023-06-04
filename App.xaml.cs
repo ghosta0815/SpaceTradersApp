@@ -1,45 +1,41 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using System.Configuration;
-using System.Windows;
+﻿using System.Windows;
 using SpaceTradersApp.Core;
-using SpaceTradersApp.MVVM.View;
-using SpaceTradersApp.MVVM.ViewModel;
 
 namespace SpaceTradersApp;
 
+/// <summary>
+/// Main Class of the application
+/// </summary>
 public partial class App : Application
 {
-    private IHost AppHost { get; }
-
+    /// <summary>
+    /// Constructor for the application
+    /// </summary>
     public App()
     {
-        AppHost = Host.CreateDefaultBuilder()
-            .ConfigureServices((hostcontext, services) =>
-            {
-                services.AddSingleton<MainWindowViewModel>();
-                services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
-                services.AddSingleton<HomeViewModel>();
-                services.AddSingleton <HomeView>(s => new HomeView(s.GetRequiredService<HomeViewModel>()));
-                services.AddSingleton<ShipViewModel>();
-                services.AddSingleton<ShipView>(s => new ShipView(s.GetRequiredService<ShipViewModel>()));
-                
-            }).Build();
     }
-
+    /// <summary>
+    /// OnStartup method that is called when starting the application
+    /// Initializes the IocContainer
+    /// </summary>
+    /// <param name="e"></param>
     protected override async void OnStartup(StartupEventArgs e)
     {
-        await AppHost!.StartAsync();
+        await IoCContainer.AppHost!.StartAsync();
 
-        IoCContainer.MyServiceProvider = AppHost.Services;
-        IoCContainer.MyServiceProvider.GetRequiredService<MainWindow>().Show();
+        IoCContainer.MainWindow.Show();
         
         base.OnStartup(e);  
     }
 
+    /// <summary>
+    /// On Exit of the application, this method is called
+    /// Stops the IoCContainer
+    /// </summary>
+    /// <param name="e"></param>
     protected override async void OnExit(ExitEventArgs e)
     {
-        await AppHost!.StopAsync();
+        await IoCContainer.AppHost!.StopAsync();
         base.OnExit(e);
     }
 }

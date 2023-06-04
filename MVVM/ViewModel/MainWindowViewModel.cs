@@ -37,16 +37,16 @@ public class MainWindowViewModel : ObservableObject
 
     public MainWindowViewModel()
     {
-        CurrentView = IoCContainer.MyServiceProvider.GetRequiredService<HomeView>();
+        CurrentView = IoCContainer.Services.GetRequiredService<HomeView>();
 
         HomeViewCommand = new RelayCommand(o =>
         {
-            CurrentView = IoCContainer.MyServiceProvider.GetRequiredService<HomeView>();
+            CurrentView = IoCContainer.Services.GetRequiredService<HomeView>();
         });
 
         ShipViewCommand = new RelayCommand(o =>
         {
-            CurrentView = IoCContainer.MyServiceProvider.GetRequiredService<ShipView>();
+            CurrentView = IoCContainer.Services.GetRequiredService<ShipView>();
         });
     }
 }
