@@ -32,10 +32,9 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
         var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
         var stringResponse = await httpClient.GetStringAsync("my/agent");
-        var response = await httpClient.GetFromJsonAsync<AccountModel>("my/agent");
-        AccountModelResponse? accountModel = JsonSerializer.Deserialize<AccountModelResponse>(stringResponse);
+        var response = await httpClient.GetFromJsonAsync<AccountModelResponse>("my/agent");
 
-        return new AccountModelResponse();
+        return response;
     }
 
     //   public async Task<AccountModel?> getAccountDataAsync()
