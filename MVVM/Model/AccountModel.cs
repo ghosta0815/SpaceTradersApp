@@ -14,20 +14,6 @@ public class AccountModel
 
 public class AccountModelResponse
 {
-    public Data? Data { get; set; }
+    public AccountModel? Data { get; set; }
 }
 
-
-public class DataModel
-{
-    public Data? Data { get; set; }
-}
-
-public class Data
-{
-    public string? accountId { get; set; }
-    public string? symbol { get; set; }
-    public string? headquarters { get; set; }
-    public int credits { get; set; }
-    public string? startingFaction { get; set; }
-}

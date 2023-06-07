@@ -14,6 +14,6 @@ namespace SpaceTradersApp.Core
         /// Gets the Account Data
         /// </summary>
         /// <returns></returns>
-        Task<AccountModelResponse?> getAccountDataAsync();
+        Task<AccountModel?> getAccountDataAsync();
     }
 }

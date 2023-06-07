@@ -46,6 +46,9 @@ class IoCContainer
     #endregion
 
     #region Helpers
+    /// <summary>
+    /// Returns the Class that performs calls to the SpaceTraders API
+    /// </summary>
     public static ISpaceTradersAPIHelper SpaceTradersAPI => Services.GetRequiredService<ISpaceTradersAPIHelper>();
     #endregion
 

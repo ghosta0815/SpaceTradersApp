@@ -69,7 +69,9 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{StaticResource ForegroundLightHighlightBrush}"/>
             </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Background" Value="{StaticResource ForegroundVeryLightHighlightBrush}"/>
+            </Trigger>
         </Style.Triggers>
-
     </Style>
 </ResourceDictionary>

@@ -4,24 +4,50 @@ using SpaceTradersApp.MVVM.View;
 
 namespace SpaceTradersApp.MVVM.ViewModel;
 
-public class MainWindowViewModel : ObservableObject
+public class MainWindowViewModel : ViewModelBase
 {
+    #region Commands
     public RelayCommand HomeViewCommand { get; set; }
 
     public RelayCommand ShipViewCommand { get; set; }
+    #endregion
 
-    public ShipViewModel ShipVM { get; set; }
+    #region ViewModels
 
-    public HomeViewModel HomeVM { get; set; }
+    public ViewModelBase ShipVM { get; set; }
+
+    public ViewModelBase HomeVM { get; set; }
+
+    #endregion
+
+    #region private Variables
 
     private object _currentView;
 
-    private string _balance = "400 C";
+    private string _balance = "-";
+
+    private string _accountName = "-";
+
+    #endregion
+
+    #region public Properties
+    public string AccountName
+    {
+        get { return _accountName; }
+        set { 
+            _accountName = value;
+            OnPropertyChanged(nameof(AccountName));
+        }
+    }
+
 
     public string Balance
     {
         get { return _balance; }
-        set { _balance = value; OnPropertyChanged(); }
+        set { 
+            _balance = value + " C";
+            OnPropertyChanged(nameof(Balance)); 
+        }
     }
 
 
@@ -34,6 +60,9 @@ public class MainWindowViewModel : ObservableObject
             OnPropertyChanged();
         }
     }
+    #endregion
+
+    #region Constructors
 
     public MainWindowViewModel()
     {
@@ -49,4 +78,5 @@ public class MainWindowViewModel : ObservableObject
             CurrentView = IoCContainer.Services.GetRequiredService<ShipView>();
         });
     }
+    #endregion
 }

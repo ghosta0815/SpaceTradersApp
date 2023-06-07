@@ -72,7 +72,7 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="gh0sta0815"
+                <TextBlock Text="{Binding AccountName}"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Left"
                    FontSize="22"

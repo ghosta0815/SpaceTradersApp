@@ -27,24 +27,13 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
         _httpClientFactory = httpClientFactory;
     }
 
-    public async Task<AccountModelResponse?> getAccountDataAsync()
+    public async Task<AccountModel?> getAccountDataAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
         var stringResponse = await httpClient.GetStringAsync("my/agent");
         var response = await httpClient.GetFromJsonAsync<AccountModelResponse>("my/agent");
 
-        return response;
+        return response.Data;
     }
-
-    //   public async Task<AccountModel?> getAccountDataAsync()
-    //   {
-    //       var request = new HttpRequestMessage(HttpMethod.Get, "https://api.spacetraders.io/v2/my/agent");
-    //       var client = _httpClientFactory.CreateClient("SpaceTradersIOClient");
-    //
-    //       HttpResponseMessage response = await client.SendAsync(request);
-    //
-    //       throw NotImplementedException();
-    //
-    //   }
 }
