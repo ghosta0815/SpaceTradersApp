@@ -37,6 +37,10 @@
                     Style="{StaticResource MenuButtonTheme}"
                     Command="{Binding ContinueGameCommand}"
                     IsEnabled="{Binding ContinueButtonEnabled}"/>
+            <TextBlock Text="{Binding LoadingText}"
+                       d:Text="Loading..."
+                       HorizontalAlignment="Center"
+                       Foreground="White"/>
         </StackPanel>
     </Grid>
 </UserControl>

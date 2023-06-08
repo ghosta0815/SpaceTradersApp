@@ -10,11 +10,11 @@ public class AsyncCommand : AsyncCommandBase
     {
         _command = command;
     }
-    public override bool CanExecute(object parameter)
+    public override bool CanExecute(object? parameter)
     {
         return true;
     }
-    public override Task ExecuteAsync(object parameter)
+    public override Task ExecuteAsync(object? parameter)
     {
         return _command();
     }

@@ -6,13 +6,13 @@ namespace SpaceTradersApp.Core;
 
 public abstract class AsyncCommandBase : IAsyncCommand
 {
-    public abstract bool CanExecute(object parameter);
-    public abstract Task ExecuteAsync(object parameter);
-    public async void Execute(object parameter)
+    public abstract bool CanExecute(object? parameter);
+    public abstract Task ExecuteAsync(object? parameter);
+    public async void Execute(object? parameter)
     {
         await ExecuteAsync(parameter);
     }
-    public event EventHandler CanExecuteChanged
+    public event EventHandler? CanExecuteChanged
     {
         add { CommandManager.RequerySuggested += value; }
         remove { CommandManager.RequerySuggested -= value; }
