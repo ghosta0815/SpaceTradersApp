@@ -17,7 +17,10 @@ public class FleetViewModel
         if (shipModelResponse == null) { return; }
         foreach(ShipModel? ship in shipModelResponse!.Data!)
         {
-            FleetListItemViewModel shipListItem = new FleetListItemViewModel(ship.Registration!.Name!, ship.Registration.Role!);
+            FleetListItemViewModel shipListItem = new FleetListItemViewModel(ship.Registration!.Name!,
+                                                                             ship.Registration.Role!,
+                                                                             $"{ship.Fuel!.Current}/{ship.Fuel.Capacity}",
+                                                                             ship.Nav!.Status!);
             ShipListItemVMs!.Add(shipListItem);
         }
     }

@@ -7,19 +7,39 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <ListView>
+        <ListView Background="{StaticResource BackgroundMainBrush}"
+                  ItemsSource="{Binding ShipListItemVMs}">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
-                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource BackgroundHighlightBrush}"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </ListView.ItemContainerStyle>
-            <ItemsControl ItemsSource="{Binding ShipListItemVMs, Mode=TwoWay}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <local:FleetListItem HorizontalAlignment="Stretch"/>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <ListView.Resources>
+                <Style TargetType="{x:Type GridViewColumnHeader}">
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                </Style>
+            </ListView.Resources>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name"
+                                    Width="Auto" 
+                                    DisplayMemberBinding="{Binding ShipName}" />
+                    <GridViewColumn Header="Role" 
+                                    Width="Auto" 
+                                    DisplayMemberBinding="{Binding Role}" />
+                    <GridViewColumn Header="Status" 
+                                    Width="Auto" 
+                                    DisplayMemberBinding="{Binding Status}" />
+                    <GridViewColumn Header="Fuel Level" 
+                                    Width="Auto" 
+                                    DisplayMemberBinding="{Binding FuelLevel}"/>
+                </GridView>
+            </ListView.View>
         </ListView>
     </Grid>
 </UserControl>

@@ -7,12 +7,11 @@
         xmlns:ViewModel="clr-namespace:SpaceTradersApp.MVVM.ViewModel"
         mc:Ignorable="d"
         Height="600"  Width="900"
-        WindowStyle ="None"
-        ResizeMode="NoResize"
+        WindowStyle ="SingleBorderWindow"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="False">
     <Border Background="{StaticResource BackgroundMainBrush}"
-            CornerRadius="20"
+            CornerRadius="0 0 5 5"
             ClipToBounds="True"
             BorderBrush="{StaticResource BackgroundHighlightBrush}"
             BorderThickness="2">

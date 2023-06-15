@@ -23,10 +23,29 @@ public class FleetListItemViewModel : ViewModelBase
 
 	}
 
-    public FleetListItemViewModel(string shipname, string role)
+	private string? _fuel;
+
+	public string? FuelLevel
+	{
+		get { return _fuel; }
+		set { _fuel = value; OnPropertyChanged(nameof(FuelLevel)); }
+	}
+
+	private string? _status;
+
+	public string? Status
+	{
+		get { return _status; }
+		set { _status = value; OnPropertyChanged(nameof(Status)); }
+	}
+
+
+	public FleetListItemViewModel(string shipname, string role, string fuelLevel, string status)
     {
 		Role = role;
 		ShipName = shipname;
+		FuelLevel = fuelLevel;
+		Status = status;
     }
 
 }
