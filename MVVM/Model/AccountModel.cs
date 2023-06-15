@@ -1,8 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿namespace SpaceTradersApp.MVVM.Model;
 
-namespace SpaceTradersApp.MVVM.Model;
-
-// AccountModelResponse myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
 public class AccountModel
 {
     public string? AccountId { get; set; }

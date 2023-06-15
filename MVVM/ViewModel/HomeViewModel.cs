@@ -9,7 +9,7 @@ public class HomeViewModel : ViewModelBase
 {
     public IAsyncCommand ContinueGameCommand { get; set; }
 
-    private string _bearerToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiR0gwU1RBIiwidmVyc2lvbiI6InYyIiwicmVzZXRfZGF0ZSI6IjIwMjMtMDYtMDMiLCJpYXQiOjE2ODU5MDU0NDMsInN1YiI6ImFnZW50LXRva2VuIn0.eUCrl0IaaEGBTKZeuhwj2VG3lZYqCO9EPPy-vpOAO4EbmXC4tUx1ajyQC0DEneCedpF1zT2Np7YTi-WAQYnSkxlwIFKILdCq1ga2Vz_eIt8AQRLyBt6CakgHD-HjKI45kk9nGWgsYAXjdUSU3XHla1dSnKZEzFd5d-Dq-r6RoJaG_srXXv74fOf9Okw-ubpfee8WRrFieqx3CxGA4E-K1r99NeA-BhkqIbdqombgLaRWdfEGc3K7TLP9f0Cz8h2PFnfmpkYthUETpQ2qITk8ZCac5bliaiKVqkCVmy2AbxPq5uI82fh2Ek4jSCHlJWVC-uFbqxbZmU-Ig74vBUTJpg";
+    private string _bearerToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiR0gwU1RBIiwidmVyc2lvbiI6InYyIiwicmVzZXRfZGF0ZSI6IjIwMjMtMDYtMTAiLCJpYXQiOjE2ODY0ODE3MDgsInN1YiI6ImFnZW50LXRva2VuIn0.tOtHGNU-i1E5ic7a6koLfWkTi5J5y8WmbHLqfd75RbrZZDCQTCAovmhOiEMovsglgebVSxrjViOPTpzVCpWFlKTb7sjlsvimqlUKqYeSozVszoc5WJDiBVNNgVkI-eO4tF6DAAdTQ93EZiFfuPsgWkLZshjOUbRw8988qdKaK6ZIoAqGPfTvTTasEqjhJARpIamWOChedgFrYxfxrAokB-loYwi-SJly8_yOutkBSxrxFgEOFGfbVvg3O9_Ly2T9X5CuiyNCBU283H2jXd5NMiFWEM4_zA_WfbpzndpNO3o3w0vXwE0PPFzkN9bARIPX8Axs7T8jmVIgtPuzif5CAw";
 
     public AccountModel? retModel;
 
@@ -62,17 +62,25 @@ public class HomeViewModel : ViewModelBase
         IoCContainer.SpaceTradersAPI.Token = BearerToken;
         AccountModel? account = await IoCContainer.SpaceTradersAPI.getAccountDataAsync();
 
+        MainWindowViewModel mainWindowVM = IoCContainer.Services.GetRequiredService<MainWindowViewModel>();
+
         if (account == null)
         {
             ContinueButtonEnabled = true;
             LoadingText = "Invalid Token";
+            mainWindowVM.AccountName = "-";
+            mainWindowVM.Balance = "-";
+            mainWindowVM.LoggedIn = false;
             return;
         }
 
-        IoCContainer.Services.GetRequiredService<MainWindowViewModel>().AccountName = account.Symbol!;
-        IoCContainer.Services.GetRequiredService<MainWindowViewModel>().Balance = account.Credits.ToString()!;
+        mainWindowVM.AccountName = account.Symbol!;
+        mainWindowVM.Balance = account.Credits.ToString()!;
+        mainWindowVM.LoggedIn = true;
         retModel = account;
         ContinueButtonEnabled = true;
-        LoadingText = "";
+        LoadingText = "Logged in";
+        
+
     }
 }

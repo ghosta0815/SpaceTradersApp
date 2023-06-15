@@ -49,18 +49,20 @@
                              Style="{StaticResource RadioButtonTheme}"
                              IsChecked="True"
                              Command="{Binding HomeViewCommand}"/>
-                <RadioButton Content="Ships"
+                <RadioButton Content="Fleet"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
                              Style="{StaticResource RadioButtonTheme}"
-                             Command="{Binding ShipViewCommand}"/>
+                             Command="{Binding FleetViewCommand}"
+                             IsEnabled="{Binding LoggedIn}"/>
                 <RadioButton Content="Factions"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
-                             Style="{StaticResource RadioButtonTheme}"/>
-            </StackPanel>
+                             Style="{StaticResource RadioButtonTheme}"
+                             IsEnabled="{Binding LoggedIn}"/>
+             </StackPanel>
 
             <!--Header-->
             <Border BorderThickness="1 0 0 1" BorderBrush="{StaticResource BackgroundHighlightBrush}" 

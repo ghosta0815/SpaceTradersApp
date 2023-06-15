@@ -26,6 +26,7 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
     private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
     #endregion
 
+
     #region public Members
     /// <summary>
     /// The Bearer Token to access the User Agent
@@ -49,6 +50,7 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
     }
     #endregion
 
+
     #region Async Methods
     /// <summary>
     /// Method to get the Account Data
@@ -68,6 +70,26 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
         }
         
         return accountModel;
+    }
+
+    /// <summary>
+    /// Method to get a paginated List of available Ships
+    /// </summary>
+    /// <returns>The List of Ships including the pagination info</returns>
+    public async Task<FleetModelResponse?> getShipsDataAsync()
+    {
+        var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+        var responseMessage = await httpClient.GetAsync("my/ships");
+        FleetModelResponse? shipModelResponse = null;
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var responseString = await responseMessage.Content.ReadAsStringAsync();
+
+            shipModelResponse = JsonSerializer.Deserialize<FleetModelResponse?>(responseString, _jsonSerializerOptions);
+        }
+
+        return shipModelResponse;
     }
     #endregion
 }
