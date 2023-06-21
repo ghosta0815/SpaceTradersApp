@@ -56,7 +56,7 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
     /// Method to get the Account Data
     /// </summary>
     /// <returns>The Account Model for this Account if the call was successful</returns>
-    public async Task<AccountModel?> getAccountDataAsync()
+    public async Task<AccountModel?> getMyAgentAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);

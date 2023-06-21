@@ -14,7 +14,7 @@ namespace SpaceTradersApp.Core
         /// Gets the Account Data
         /// </summary>
         /// <returns></returns>
-        Task<AccountModel?> getAccountDataAsync();
+        Task<AccountModel?> getMyAgentAsync();
 
         /// <summary>
         /// Gets The List of Available Ships

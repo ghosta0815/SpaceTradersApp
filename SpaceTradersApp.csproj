@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Dictionary1.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="AppSettings.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

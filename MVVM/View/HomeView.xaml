@@ -11,33 +11,70 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="250"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1"
-                    Grid.Column="1"
-                    Orientation="Vertical"
-                    HorizontalAlignment="Center">
-            <Button Content="New Game"
-                    Style="{StaticResource MenuButtonTheme}"/>
-            <TextBox Height="60"
-                     Width="250"
-                     Margin="0 30 0 10"
+        <Border Grid.Row="1"
+                Grid.Column="1"
+                Margin="0 20 0 20">
+            
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Stretch">
+                <TextBlock Text="Agent"
+                           Foreground="White"/>
+                <TextBox Style="{StaticResource AgentTextBoxTheme}"
+                         Margin="0 0 0 10"
+                         Height="30"/>
+                <TextBlock Text="Faction"
+                           Foreground="White"/>
+                <ComboBox SelectedIndex="0"
+                          Margin="0 0 0 10"
+                          Height="30"
+                          Style="{StaticResource CustomComboBox}"
+                          Background="{StaticResource BackgroundHighlightBrush}"
+                          ItemsSource="{Binding FactionList}">
+                </ComboBox>
+
+                <Button Content="New Game"
+                        Style="{StaticResource MenuButtonTheme}"/>
+            </StackPanel>
+        </Border>
+        <Border Grid.Row="2"
+                Grid.Column="1"
+                Margin="0 20 0 20"
+                >
+            <StackPanel Grid.Row="1"
+                        Grid.Column="1"
+                        Orientation="Vertical"
+                        HorizontalAlignment="Stretch">
+                <TextBlock Text="Token"
+                           Foreground="White"/>
+                <TextBox Height="60"
+                     Margin="0 0 0 10"
                      Text="{Binding BearerToken}"
                      Style="{StaticResource TokenTextBoxTheme}"/>
-            <Button Content="Continue Game"
+                <Button Content="Continue Game"
                     Style="{StaticResource MenuButtonTheme}"
                     Command="{Binding ContinueGameCommand}"
                     IsEnabled="{Binding ContinueButtonEnabled}"/>
+            </StackPanel>
+            </Border>
+        <Border Grid.Column="1"
+                Grid.Row="3"
+                Margin="0 20 0 20">
             <TextBlock Text="{Binding LoadingText}"
-                       d:Text="Loading..."
-                       HorizontalAlignment="Center"
-                       Foreground="White"/>
-        </StackPanel>
+                           d:Text="Loading..."
+                           HorizontalAlignment="Center"
+                           Foreground="White"/>
+        </Border>
     </Grid>
 </UserControl>

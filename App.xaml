@@ -9,12 +9,13 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/ButtonThemes.xaml"/>
                 <ResourceDictionary Source="Themes/TextBoxThemes.xaml"/>
+                <ResourceDictionary Source="Themes/ComboBoxThemes.xaml"/>
                 <ResourceDictionary Source="Styles/Colours.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type ViewModel:FleetViewModel}">
+            <!--DataTemplate DataType="{x:Type ViewModel:FleetViewModel}">
                 <View:FleetView/>
-            </DataTemplate>
+            </DataTemplate-->
             <!--DataTemplate DataType="{x:Type ViewModel:HomeViewModel}">
                 <View:HomeView/>
             </DataTemplate-->
