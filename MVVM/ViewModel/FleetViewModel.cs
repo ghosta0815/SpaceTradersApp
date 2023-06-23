@@ -6,11 +6,24 @@ using System.Threading.Tasks;
 
 namespace SpaceTradersApp.MVVM.ViewModel;
 
+/// <summary>
+/// A class on displaying the fleet view
+/// </summary>
 public class FleetViewModel
 {
+    #region public members
+    /// <summary>
+    /// The list of available ships
+    /// </summary>
     public ObservableCollection<FleetListItemViewModel>? ShipListItemVMs { get; set; } = new ObservableCollection<FleetListItemViewModel>();
+    #endregion
 
-    internal void DisplayShipListAsync(FleetModelResponse? shipModelResponse)
+    #region async methods
+    /// <summary>
+    /// Displays the ships of the agent
+    /// </summary>
+    /// <param name="shipModelResponse">the reponse model containing the ships</param>
+    internal void DisplayShipList(FleetModelResponse? shipModelResponse)
     {
         ShipListItemVMs!.Clear();
 
@@ -24,4 +37,5 @@ public class FleetViewModel
             ShipListItemVMs!.Add(shipListItem);
         }
     }
+    #endregion
 }

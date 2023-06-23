@@ -38,7 +38,6 @@ public class HomeViewModel : ViewModelBase
     #endregion
 
     #region public Members
-
     /// <summary>
     /// The Statustext when Loading a user Agent
     /// </summary>
@@ -182,6 +181,8 @@ public class HomeViewModel : ViewModelBase
     /// </summary>
     private async Task RegisterAgentAsync()
     {
+        if (IsAccountDataInvalid()) return;
+
         AccountButtonsEnabled = false;
         StatusMessage = "Registering new account...";
 
@@ -213,11 +214,11 @@ public class HomeViewModel : ViewModelBase
     /// AgentName >= 3 and <= 14
     /// </summary>
     /// <returns>True if the Registration data is valid</returns>
-    private bool IsAccountDataValid()
+    private bool IsAccountDataInvalid()
     {
-        if (AgentName.Length < 3) return false;
-        if (AgentName.Length > 15) return false;
-        return true;
+        if (AgentName.Length < 3) return true;
+        if (AgentName.Length > 15) return true;
+        return false;
     }
     #endregion
 }

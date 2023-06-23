@@ -119,7 +119,7 @@ public class MainWindowViewModel : ViewModelBase
     private async Task LoadFleetAsync()
     {
         var shipModelResponse = await IoCContainer.SpaceTradersAPI.getShipsDataAsync();
-        IoCContainer.Services.GetRequiredService<FleetViewModel>().DisplayShipListAsync(shipModelResponse);
+        IoCContainer.Services.GetRequiredService<FleetViewModel>().DisplayShipList(shipModelResponse);
     }
     #endregion
 }

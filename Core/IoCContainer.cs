@@ -53,8 +53,6 @@ class IoCContainer
     public static ISpaceTradersAPIHelper SpaceTradersAPI => Services.GetRequiredService<ISpaceTradersAPIHelper>();
     #endregion
 
-
-
     #region Constructors
     /// <summary>
     /// Explicit static constructor to tell C# compiler

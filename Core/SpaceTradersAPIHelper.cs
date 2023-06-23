@@ -24,6 +24,9 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
     /// </summary>
     private readonly IHttpClientFactory _httpClientFactory;
 
+    /// <summary>
+    /// Serialization options for serializing HTTP Requests
+    /// </summary>
     private readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions(JsonSerializerDefaults.Web);
     #endregion
 
