@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -56,17 +57,17 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
     /// Method to get the Account Data
     /// </summary>
     /// <returns>The Account Model for this Account if the call was successful</returns>
-    public async Task<AccountModel?> getMyAgentAsync()
+    public async Task<AgentModel?> getMyAgentAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
         var responseMessage = await httpClient.GetAsync("my/agent");
-        AccountModel? accountModel = null;
+        AgentModel? accountModel = null;
         if(responseMessage.IsSuccessStatusCode)
         {
             var responseString = await responseMessage.Content.ReadAsStringAsync();
 
-            accountModel = JsonSerializer.Deserialize<AccountModelResponse?>(responseString, _jsonSerializerOptions)?.Data;
+            accountModel = JsonSerializer.Deserialize<AgentModelResponse?>(responseString, _jsonSerializerOptions)?.Data;
         }
         
         return accountModel;
@@ -90,6 +91,40 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
         }
 
         return shipModelResponse;
+    }
+
+    /// <summary>
+    /// Creates a new user agent
+    /// </summary>
+    /// <param name="agentName">The name of the new agent</param>
+    /// <param name="selectedFaction">The faction, the account is created in</param>
+    /// <returns></returns>
+    /// <exception cref="NotImplementedException"></exception>
+    public async Task<AccountModel?> RegisterNewAccountAsync(string agentName, string? selectedFaction)
+    {
+        var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
+        var registerAgentRequest = new RegisterAgentRequest()
+        {
+            Symbol = agentName,
+            Faction = selectedFaction
+        };
+
+        var requestMessage = new StringContent(JsonSerializer.Serialize(registerAgentRequest), 
+            Encoding.UTF8, "application/json");
+
+        var responseMessage = await httpClient.PostAsync("register", requestMessage);
+
+        AccountModelResponse? accountModelResponse = null;
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var responseString = await responseMessage.Content.ReadAsStringAsync();
+
+            accountModelResponse = JsonSerializer.Deserialize<AccountModelResponse?>(responseString, _jsonSerializerOptions);
+        }
+        else return null;
+
+        return accountModelResponse!.Data;
+
     }
     #endregion
 }

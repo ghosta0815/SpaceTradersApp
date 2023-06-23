@@ -14,12 +14,20 @@ namespace SpaceTradersApp.Core
         /// Gets the Account Data
         /// </summary>
         /// <returns></returns>
-        Task<AccountModel?> getMyAgentAsync();
+        Task<AgentModel?> getMyAgentAsync();
 
         /// <summary>
         /// Gets The List of Available Ships
         /// </summary>
         /// <returns></returns>
         Task<FleetModelResponse?> getShipsDataAsync();
+
+        /// <summary>
+        /// Registers a new Agent Account
+        /// </summary>
+        /// <param name="agentName">The name of the agent</param>
+        /// <param name="selectedFaction">the selected faction</param>
+        /// <returns></returns>
+        Task<AccountModel?> RegisterNewAccountAsync(string agentName, string? selectedFaction);
     }
 }
