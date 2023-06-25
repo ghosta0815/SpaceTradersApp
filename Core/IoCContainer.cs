@@ -51,6 +51,11 @@ class IoCContainer
     /// Returns the Class that performs calls to the SpaceTraders API
     /// </summary>
     public static ISpaceTradersAPIHelper SpaceTradersAPI => Services.GetRequiredService<ISpaceTradersAPIHelper>();
+
+    /// <summary>
+    /// Returns the Class that stores and writes the Bearer Tokens
+    /// </summary>
+    public static ITokenFileHandler TokenFileHandler => Services.GetRequiredService<ITokenFileHandler>();
     #endregion
 
     #region Constructors
@@ -66,8 +71,8 @@ class IoCContainer
             {
                 services.AddSingleton<MainWindowViewModel>();
                 services.AddSingleton<MainWindow>(s => new MainWindow(s.GetRequiredService<MainWindowViewModel>()));
-                services.AddSingleton<HomeViewModel>();
-                services.AddSingleton<HomeView>(s => new HomeView(s.GetRequiredService<HomeViewModel>()));
+                services.AddSingleton<StartScreenViewModel>();
+                services.AddSingleton<StartScreenView>(s => new StartScreenView(s.GetRequiredService<StartScreenViewModel>()));
                 services.AddSingleton<FleetViewModel>();
                 services.AddSingleton<FleetView>(s => new FleetView(s.GetRequiredService<FleetViewModel>()));
 
@@ -77,6 +82,7 @@ class IoCContainer
                     c.DefaultRequestHeaders.Add("Accept", "application/json");
                 });
                 services.AddSingleton<ISpaceTradersAPIHelper, SpaceTradersAPIHelper>();
+                services.AddSingleton<ITokenFileHandler, TokenFileHandler>();
             }).Build();
 
         Services = AppHost.Services;

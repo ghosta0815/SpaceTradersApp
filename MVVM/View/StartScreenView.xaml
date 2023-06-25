@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="SpaceTradersApp.MVVM.View.HomeView"
+﻿<UserControl x:Class="SpaceTradersApp.MVVM.View.StartScreenView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -60,6 +60,24 @@
                         Grid.Column="1"
                         Orientation="Vertical"
                         HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Content="Load"
+                            Margin="0 5 5 5"
+                            Command="{Binding LoadTokenCommand}"
+                            Style="{StaticResource MenuButtonTheme}"
+                            IsEnabled="{Binding AccountButtonsEnabled}"/>
+                    <Button Grid.Column="1"
+                            Content="Save"
+                            Margin="5 5 0 5"
+                            Command="{Binding SaveTokenCommand}"
+                            Style="{StaticResource MenuButtonTheme}"
+                            IsEnabled="{Binding AccountButtonsEnabled}"/>
+                </Grid>
                 <TextBlock Text="Token"
                            Foreground="White"/>
                 <TextBox Height="60"

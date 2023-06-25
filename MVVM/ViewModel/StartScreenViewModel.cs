@@ -6,10 +6,11 @@ using System.Windows.Data;
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Windows.Input;
 
 namespace SpaceTradersApp.MVVM.ViewModel;
 
-public class HomeViewModel : ViewModelBase
+public class StartScreenViewModel : ViewModelBase
 {
     #region Commands
     /// <summary>
@@ -21,10 +22,20 @@ public class HomeViewModel : ViewModelBase
     /// Registers a new player agent and creates a new bearer token
     /// </summary>
     public IAsyncCommand RegisterAgentCommand { get; set; }
+
+    /// <summary>
+    /// Saves the Bearer Token
+    /// </summary>
+    public RelayCommand SaveTokenCommand { get; set; }
+
+    /// <summary>
+    /// Loads the Bearer Token
+    /// </summary>
+    public RelayCommand LoadTokenCommand { get; set; }
     #endregion
 
     #region private Members
-    private string _bearerToken = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGlmaWVyIjoiR0hPU1RBIiwidmVyc2lvbiI6InYyIiwicmVzZXRfZGF0ZSI6IjIwMjMtMDYtMTciLCJpYXQiOjE2ODc1MTk3MzAsInN1YiI6ImFnZW50LXRva2VuIn0.H6lil34uDR-1zlqHH4OeN1lZZc4uiCMu9yRFky_e-5isFtvi0dRbIiiad9Jq2-p1rynIxjql7JlOlahOdmyA4C2hQ14Qt3lKAPZFcliZMyp9Lmid8D5T3cq76uBI4cJhAzjxOlymD_Gs5MNut617iPiCoNBu1DuJXc-zAdYhKVczVJ1FddJJGWxASO_069tp4QBvlXSdne8v5Tn3NuvSgtfcyJv8bp1Nx9vWkYxm5cwL0gN7F0q97lq79Ik0S-pbUaRZKFlpXZJXKlzfIxeyfiv5qE7Mk2Uv0Bg2XhsAMCiCdL-kbu3k5u8-ilkfZ0Bvx-5wAwCy-PbzYIE9jQKGRQ";
+    private string _bearerToken = "";
 
     private bool _continueButtonEnabled = true;
 
@@ -105,7 +116,7 @@ public class HomeViewModel : ViewModelBase
     /// <summary>
     /// Default Constructor setting up the ViewModel with its default values and command bindings
     /// </summary>
-    public HomeViewModel()
+    public StartScreenViewModel()
     {
         List<string> factionList = new List<string>() {
             "COSMIC",
@@ -141,6 +152,18 @@ public class HomeViewModel : ViewModelBase
         {
             await RegisterAgentAsync();
         });
+
+        SaveTokenCommand = new RelayCommand(o =>
+        {
+            var mainWindow = IoCContainer.Services.GetRequiredService<MainWindowViewModel>();
+            if (mainWindow.LoggedIn) IoCContainer.TokenFileHandler.WriteTokenToFile(BearerToken, AgentName);
+        });
+
+        LoadTokenCommand = new RelayCommand(o =>
+        {
+            BearerToken = IoCContainer.TokenFileHandler.ReadTokenFromFile();
+        });
+
     }
     #endregion
 
@@ -159,6 +182,7 @@ public class HomeViewModel : ViewModelBase
 
         if (agent == null)
         {
+            AgentName = "";
             AccountButtonsEnabled = true;
             StatusMessage = "Invalid Token";
             mainWindowVM.AccountName = "-";
@@ -167,6 +191,7 @@ public class HomeViewModel : ViewModelBase
             return;
         }
 
+        AgentName = agent.Symbol!;
         mainWindowVM.AccountName = agent.Symbol!;
         mainWindowVM.Balance = agent.Credits.ToString()!;
         mainWindowVM.LoggedIn = true;
@@ -220,5 +245,6 @@ public class HomeViewModel : ViewModelBase
         if (AgentName.Length > 15) return true;
         return false;
     }
+
     #endregion
 }

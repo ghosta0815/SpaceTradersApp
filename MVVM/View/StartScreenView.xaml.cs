@@ -5,11 +5,11 @@ using System.Windows.Controls;
 namespace SpaceTradersApp.MVVM.View;
 
 /// <summary>
-/// Interaction logic for HomeView.xaml
+/// Interaction logic for StartScreenView.xaml
 /// </summary>
-public partial class HomeView : UserControl
+public partial class StartScreenView : UserControl
 {
-    public HomeView(HomeViewModel vm)
+    public StartScreenView(StartScreenViewModel vm)
     {
         DataContext = vm;
         InitializeComponent();

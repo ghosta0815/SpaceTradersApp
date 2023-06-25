@@ -62,7 +62,7 @@
                 </Setter.Value>
             </Setter>
 
-            <Setter Property="Background" Value="{StaticResource ForegroundMainBrush}"/>
+            <Setter Property="Background" Value="{StaticResource ForegroundLightHighlightBrush}"/>
             <Setter Property="BorderThickness" Value="2"/>
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Border.CornerRadius" Value="5"/>
@@ -70,10 +70,10 @@
 
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource ForegroundLightHighlightBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ForegroundVeryLightHighlightBrush}"/>
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Background" Value="{StaticResource ForegroundVeryLightHighlightBrush}"/>
+                <Setter Property="Background" Value="{StaticResource ForegroundMainBrush}"/>
             </Trigger>
         </Style.Triggers>
     </Style>

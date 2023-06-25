@@ -92,17 +92,16 @@ public class MainWindowViewModel : ViewModelBase
     #endregion
 
     #region Constructors
-
     /// <summary>
     /// Default Constructor
     /// </summary>
     public MainWindowViewModel()
     {
-        _currentView = IoCContainer.Services.GetRequiredService<HomeView>();
+        _currentView = IoCContainer.Services.GetRequiredService<StartScreenView>();
 
         HomeViewCommand = new RelayCommand(o =>
         {
-            CurrentView = IoCContainer.Services.GetRequiredService<HomeView>();
+            CurrentView = IoCContainer.Services.GetRequiredService<StartScreenView>();
         });
 
         FleetViewCommand = new AsyncCommand(async () =>
