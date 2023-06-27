@@ -26,6 +26,12 @@
             </ListView.Resources>
             <ListView.View>
                 <GridView>
+                    <GridViewColumn Header="System"
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding System}"/>
+                    <GridViewColumn Header="Waypoint"
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding WayPoint}"/>
                     <GridViewColumn Header="Name"
                                     Width="Auto" 
                                     DisplayMemberBinding="{Binding ShipName}" />

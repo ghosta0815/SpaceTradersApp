@@ -20,7 +20,7 @@ namespace SpaceTradersApp.Core
         /// Gets The List of Available Ships
         /// </summary>
         /// <returns></returns>
-        Task<FleetModelResponse?> getShipsDataAsync();
+        Task<MyShipsModelResponse?> getShipsDataAsync();
 
         /// <summary>
         /// Registers a new Agent Account

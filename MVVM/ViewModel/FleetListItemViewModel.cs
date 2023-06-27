@@ -15,13 +15,17 @@ public class FleetListItemViewModel : ViewModelBase
     private string? _fuel;
 
     private string? _status;
-    #endregion
 
-    #region Public Members
+	private string? _system;
+
+	private string? _wayPoint;
+	#endregion
+
+	#region Public Members
 	/// <summary>
 	/// The role of the ship, e.g. explorer, freighter
 	/// </summary>
-    public string? Role
+	public string? Role
 	{
 		get { return _role; }
 		set { _role = value; OnPropertyChanged(nameof(Role)); }
@@ -55,22 +59,33 @@ public class FleetListItemViewModel : ViewModelBase
 		get { return _status; }
 		set { _status = value; OnPropertyChanged(nameof(Status)); }
 	}
+
+    /// <summary>
+    /// The System the ship is currently in
+    /// </summary>
+    public string? System
+    {
+        get { return _system; }
+        set { _system = value; }
+    }
+
+    /// <summary>
+    /// The waypoint symbol of the ship's current location, or if the ship is in-transit, 
+	/// the waypoint symbol of the ship's destination.
+    /// </summary>
+    public string? WayPoint
+    {
+        get { return _wayPoint; }
+        set { _wayPoint = value; }
+    }
     #endregion
 
     #region constructors
-	/// <summary>
-	/// The default constructor
-	/// </summary>
-	/// <param name="shipname">The name of the ship</param>
-	/// <param name="role">The role of the ship</param>
-	/// <param name="fuelLevel">The current and max fuel level current/Max</param>
-	/// <param name="status">The status of the ship</param>
-	public FleetListItemViewModel(string shipname, string role, string fuelLevel, string status)
+    /// <summary>
+    /// The default constructor
+    /// </summary>
+    public FleetListItemViewModel()
     {
-		Role = role;
-		ShipName = shipname;
-		FuelLevel = fuelLevel;
-		Status = status;
     }
 	#endregion
 }

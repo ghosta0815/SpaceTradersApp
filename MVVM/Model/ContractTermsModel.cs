@@ -7,7 +7,7 @@ namespace SpaceTradersApp.MVVM.Model;
 /// <summary>
 /// Class representing the terms of a contract
 /// </summary>
-public class TermsModel
+public class ContractTermsModel
 {
     /// <summary>
     /// The deadline for the contract.

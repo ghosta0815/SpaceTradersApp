@@ -70,7 +70,7 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
         {
             var responseString = await responseMessage.Content.ReadAsStringAsync();
 
-            accountModel = JsonSerializer.Deserialize<AgentModelResponse?>(responseString, _jsonSerializerOptions)?.Data;
+            accountModel = JsonSerializer.Deserialize<MyAgentModelResponse?>(responseString, _jsonSerializerOptions)?.Data;
         }
         
         return accountModel;
@@ -80,17 +80,17 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
     /// Method to get a paginated List of available Ships
     /// </summary>
     /// <returns>The List of Ships including the pagination info</returns>
-    public async Task<FleetModelResponse?> getShipsDataAsync()
+    public async Task<MyShipsModelResponse?> getShipsDataAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
         httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
         var responseMessage = await httpClient.GetAsync("my/ships");
-        FleetModelResponse? shipModelResponse = null;
+        MyShipsModelResponse? shipModelResponse = null;
         if (responseMessage.IsSuccessStatusCode)
         {
             var responseString = await responseMessage.Content.ReadAsStringAsync();
 
-            shipModelResponse = JsonSerializer.Deserialize<FleetModelResponse?>(responseString, _jsonSerializerOptions);
+            shipModelResponse = JsonSerializer.Deserialize<MyShipsModelResponse?>(responseString, _jsonSerializerOptions);
         }
 
         return shipModelResponse;
@@ -117,12 +117,12 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
 
         var responseMessage = await httpClient.PostAsync("register", requestMessage);
 
-        AccountModelResponse? accountModelResponse = null;
+        RegisterModelResponse? accountModelResponse = null;
         if (responseMessage.IsSuccessStatusCode)
         {
             var responseString = await responseMessage.Content.ReadAsStringAsync();
 
-            accountModelResponse = JsonSerializer.Deserialize<AccountModelResponse?>(responseString, _jsonSerializerOptions);
+            accountModelResponse = JsonSerializer.Deserialize<RegisterModelResponse?>(responseString, _jsonSerializerOptions);
         }
         else return null;
 

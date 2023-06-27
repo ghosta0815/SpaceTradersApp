@@ -5,9 +5,9 @@ using System.Text.Json.Serialization;
 namespace SpaceTradersApp.MVVM.Model;
 
 /// <summary>
-/// A class representing the response after registering a new agent
+/// POST https://api.spacetraders.io/v2/register
 /// </summary>
-public class AccountModelResponse
+public class RegisterModelResponse
 {
     /// <summary>
     /// The response for registering a new account

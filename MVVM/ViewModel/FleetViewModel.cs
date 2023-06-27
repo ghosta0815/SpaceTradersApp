@@ -23,17 +23,22 @@ public class FleetViewModel
     /// Displays the ships of the agent
     /// </summary>
     /// <param name="shipModelResponse">the reponse model containing the ships</param>
-    internal void DisplayShipList(FleetModelResponse? shipModelResponse)
+    internal void DisplayShipList(MyShipsModelResponse? shipModelResponse)
     {
         ShipListItemVMs!.Clear();
 
         if (shipModelResponse == null) { return; }
         foreach(ShipModel? ship in shipModelResponse!.Data!)
         {
-            FleetListItemViewModel shipListItem = new FleetListItemViewModel(ship.Registration!.Name!,
-                                                                             ship.Registration.Role!,
-                                                                             $"{ship.Fuel!.Current}/{ship.Fuel.Capacity}",
-                                                                             ship.Nav!.Status!);
+            FleetListItemViewModel shipListItem = new FleetListItemViewModel()
+            {
+                ShipName = ship.Registration!.Name!,
+                Role = ship.Registration.Role!,
+                FuelLevel = $"{ship.Fuel!.Current}/{ship.Fuel.Capacity}",
+                Status = ship.Nav!.Status!,
+                System = ship.Nav.SystemSymbol,
+                WayPoint = ship.Nav.WaypointSymbol
+            };
             ShipListItemVMs!.Add(shipListItem);
         }
     }

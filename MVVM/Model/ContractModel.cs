@@ -34,7 +34,7 @@ public class ContractModel
     /// The terms to fulfill the contract.
     /// </summary>
     [JsonPropertyName("terms")]
-    public TermsModel? Terms { get; set; }
+    public ContractTermsModel? Terms { get; set; }
 
     /// <summary>
     /// Whether the contract has been accepted by the agent

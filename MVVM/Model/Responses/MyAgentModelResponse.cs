@@ -1,9 +1,9 @@
 ﻿namespace SpaceTradersApp.MVVM.Model;
 
 /// <summary>
-/// A class representing the response for an agent
+/// GET https://api.spacetraders.io/v2/my/agent
 /// </summary>
-public class AgentModelResponse
+public class MyAgentModelResponse
 {
     /// <summary>
     /// The data retrieved after requesting the agent data

@@ -4,20 +4,21 @@ using System.Text.Json.Serialization;
 namespace SpaceTradersApp.MVVM.Model;
 
 /// <summary>
-/// A paginated list of all of ships under your agent's ownership.
+/// GET https://api.spacetraders.io/v2/systems
 /// </summary>
-public class FleetModelResponse
+public class ListSystemsResponse
 {
     /// <summary>
-    /// A List of available Ships
+    /// The List containing several systems
     /// </summary>
     [JsonPropertyName("data")]
-    public List<ShipModel>? Data { get; set; }
+    public List<SystemModel>? Data { get; set; }
 
     /// <summary>
-    /// Pagination metadata for the Shiplist.
+    /// The pagination Data
     /// </summary>
     [JsonPropertyName("meta")]
     public PaginationMetaData? Meta { get; set; }
 }
+
 
