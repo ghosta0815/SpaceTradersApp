@@ -17,6 +17,12 @@ namespace SpaceTradersApp.Core
         Task<AgentModel?> getMyAgentAsync();
 
         /// <summary>
+        /// Get the List of Sectors
+        /// </summary>
+        /// <returns></returns>
+        Task<ListSystemsResponse?> getSectorListAsync();
+
+        /// <summary>
         /// Gets The List of Available Ships
         /// </summary>
         /// <returns></returns>

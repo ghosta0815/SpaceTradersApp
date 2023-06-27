@@ -44,6 +44,33 @@ class IoCContainer
     /// The MainWindow shorthand
     /// </summary>
     public static MainWindow MainWindow => Services.GetRequiredService<MainWindow>();
+
+    /// <summary>
+    /// The FleetView shorthand
+    /// </summary>
+    public static FleetView FleetView => Services.GetRequiredService<FleetView>();
+
+    /// <summary>
+    /// The sector View Shorthand
+    /// </summary>
+    public static SectorView SectorView => Services.GetRequiredService<SectorView>();
+    #endregion
+
+    #region ViewModels
+    /// <summary>
+    /// The MainWindowModel shorthand
+    /// </summary>
+    public static MainWindowViewModel MainWindowModel => Services.GetRequiredService<MainWindowViewModel>();
+
+    /// <summary>
+    /// The FleetViewModel shorthand
+    /// </summary>
+    public static FleetViewModel FleetViewModel => Services.GetRequiredService<FleetViewModel>();
+
+    /// <summary>
+    /// The sector ViewModel Shorthand
+    /// </summary>
+    public static SectorViewModel SectorViewModel => Services.GetRequiredService<SectorViewModel>();
     #endregion
 
     #region Helpers
@@ -75,6 +102,8 @@ class IoCContainer
                 services.AddSingleton<StartScreenView>(s => new StartScreenView(s.GetRequiredService<StartScreenViewModel>()));
                 services.AddSingleton<FleetViewModel>();
                 services.AddSingleton<FleetView>(s => new FleetView(s.GetRequiredService<FleetViewModel>()));
+                services.AddSingleton<SectorViewModel>();
+                services.AddSingleton<SectorView>(s => new SectorView(s.GetRequiredService<SectorViewModel>()));
 
                 services.AddHttpClient("SpaceTradersAPI", c =>
                 {

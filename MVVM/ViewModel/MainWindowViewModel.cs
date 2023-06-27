@@ -19,6 +19,11 @@ public class MainWindowViewModel : ViewModelBase
     /// Command for switching to the Fleet View
     /// </summary>
     public IAsyncCommand FleetViewCommand { get; set; }
+
+    /// <summary>
+    /// Command for switching the view to the Sector View
+    /// </summary>
+    public IAsyncCommand SectorViewCommand { get; set; }
     #endregion
 
     #region private Variables
@@ -106,10 +111,18 @@ public class MainWindowViewModel : ViewModelBase
 
         FleetViewCommand = new AsyncCommand(async () =>
         {
-            CurrentView = IoCContainer.Services.GetRequiredService<FleetView>();
+            CurrentView = IoCContainer.FleetView;
             await LoadFleetAsync();
         });
+
+        SectorViewCommand = new AsyncCommand(async () =>
+        {
+            CurrentView = IoCContainer.SectorView;
+            await LoadSectorAsync();
+        });
     }
+
+
 
     /// <summary>
     /// Loads the List of Ships
@@ -118,7 +131,17 @@ public class MainWindowViewModel : ViewModelBase
     private async Task LoadFleetAsync()
     {
         var shipModelResponse = await IoCContainer.SpaceTradersAPI.getShipsDataAsync();
-        IoCContainer.Services.GetRequiredService<FleetViewModel>().DisplayShipList(shipModelResponse);
+        IoCContainer.FleetViewModel.DisplayShipList(shipModelResponse);
+    }
+
+    /// <summary>
+    /// Loads the List of Sectors
+    /// </summary>
+    /// <returns></returns>
+    private async Task LoadSectorAsync()
+    {
+        var sectorModelResponse = await IoCContainer.SpaceTradersAPI.getSectorListAsync();
+        IoCContainer.SectorViewModel.DisplaySectorList(sectorModelResponse);
     }
     #endregion
 }

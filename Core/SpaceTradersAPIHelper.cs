@@ -96,6 +96,22 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
         return shipModelResponse;
     }
 
+    public async Task<ListSystemsResponse?> getSectorListAsync()
+    {
+        var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+        var responseMessage = await httpClient.GetAsync("Systems");
+        ListSystemsResponse? listSystemsResponse = null;
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var responseString = await responseMessage.Content.ReadAsStringAsync();
+
+            listSystemsResponse = JsonSerializer.Deserialize<ListSystemsResponse?>(responseString, _jsonSerializerOptions);
+        }
+
+        return listSystemsResponse;
+    }
+
     /// <summary>
     /// Creates a new user agent
     /// </summary>

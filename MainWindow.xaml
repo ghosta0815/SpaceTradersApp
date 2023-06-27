@@ -55,10 +55,11 @@
                              Style="{StaticResource RadioButtonTheme}"
                              Command="{Binding FleetViewCommand}"
                              IsEnabled="{Binding LoggedIn}"/>
-                <RadioButton Content="Factions"
+                <RadioButton Content="Sectors"
                              Height="50"
                              Foreground="White"
                              FontSize="14"
+                             Command="{Binding SectorViewCommand}"
                              Style="{StaticResource RadioButtonTheme}"
                              IsEnabled="{Binding LoggedIn}"/>
              </StackPanel>
