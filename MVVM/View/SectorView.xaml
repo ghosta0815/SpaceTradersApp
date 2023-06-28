@@ -7,8 +7,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!-- The List of Systems -->
         <ListView Background="{StaticResource BackgroundMainBrush}"
-                  ItemsSource="{Binding SectorListItemVMs}">
+                  ItemsSource="{Binding SectorListItemVMs}"
+                  Grid.Column="0">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="Foreground" Value="White"/>
@@ -29,8 +35,59 @@
                     <GridViewColumn Header="System"
                                     Width="Auto"
                                     DisplayMemberBinding="{Binding SectorName}"/>
+                    <GridViewColumn Header="Type"
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding SectorType}"/>
+                    <GridViewColumn Header="Waypoints"
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding WayPoints}"/>
+                    <GridViewColumn Header="Factions"
+                                    Width="Auto"
+                                    DisplayMemberBinding="{Binding Factions}"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        <!--The display of a System-->
+        <Canvas Background="{StaticResource BackgroundHighlightBrush}"
+                x:Name="StarScapeCanvas"
+                Margin="4"
+                ClipToBounds="True"
+                Grid.Column="1"
+                xmlns:Observe.Value ="True"
+                xmlns:ObservableWidth.Value="{Binding ViewPort.Width, Mode=OneWayToSource}"
+                xmlns:ObservableHeight.Value="{Binding ViewPort.Height, Mode=OneWayToSource}"
+                xmlns:MouseClickObserve.Value="True">
+
+            <!--Displayd Orbitals on the Canvas-->
+            <ItemsControl ItemsSource="{Binding WaypointListItemVMs, Mode=TwoWay}"
+                      Panel.ZIndex="100">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:SectorWaypointControl/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Left" Value="{Binding X}" />
+                        <Setter Property="Canvas.Top" Value="{Binding Y}" />
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+
+            <!-- The Position Display -->
+            <TextBlock Canvas.Bottom="12"
+                   Canvas.Left="12"
+                   Panel.ZIndex="1010"
+                   Foreground="{StaticResource ForegroundVeryLightHighlightBrush}"
+                   FontSize="8"
+                   Text="123123"/>
+            <!--Text="{Binding CursorSpacePosition, Converter={localConverter:CursorSpacePositionConverter}}-->
+
+        </Canvas>
     </Grid>
 </UserControl>

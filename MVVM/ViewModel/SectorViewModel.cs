@@ -2,6 +2,7 @@
 using SpaceTradersApp.MVVM.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace SpaceTradersApp.MVVM.ViewModel;
@@ -16,6 +17,16 @@ public class SectorViewModel
     /// The list of available ships
     /// </summary>
     public ObservableCollection<SectorListItemViewModel>? SectorListItemVMs { get; set; } = new ObservableCollection<SectorListItemViewModel>();
+
+    public ObservableCollection<WaypointListItemViewModel>? WaypointListItemVMs { get; set; } = new ObservableCollection<WaypointListItemViewModel>()
+    {
+        new WaypointListItemViewModel()
+        {
+            Name = "Best planet Ever",
+            X = 100,
+            Y = 200
+        }
+    };
     #endregion
 
     #region async methods
@@ -30,9 +41,17 @@ public class SectorViewModel
         if (listSystemsResponse == null) { return; }
         foreach(SystemModel? system in listSystemsResponse!.Data!)
         {
+            string factionList = "";
+            foreach(var systemFactionModel in system.Factions!)
+            {
+                factionList += $"|{systemFactionModel.Symbol}";
+            }
             SectorListItemViewModel sectorListItem = new SectorListItemViewModel()
             {
-                SectorName = system.Symbol
+                SectorName = system.Symbol,
+                SectorType = system.Type,
+                Factions = factionList,
+                WayPoints = system.Waypoints!.Count
             };
             SectorListItemVMs!.Add(sectorListItem);
         }
