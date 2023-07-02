@@ -35,5 +35,12 @@ namespace SpaceTradersApp.Core
         /// <param name="selectedFaction">the selected faction</param>
         /// <returns></returns>
         Task<AccountModel?> RegisterNewAccountAsync(string agentName, string? selectedFaction);
+
+        /// <summary>
+        /// Returns the Waypoints of a System
+        /// </summary>
+        /// <param name="sectorName">The name of the sector to display</param>
+        /// <returns></returns>
+        Task<SystemModel?> getWaypointsAsync(string sectorName);
     }
 }

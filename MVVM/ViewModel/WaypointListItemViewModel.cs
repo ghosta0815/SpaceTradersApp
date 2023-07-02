@@ -9,28 +9,50 @@ namespace SpaceTradersApp.MVVM.ViewModel
 {
     public class WaypointListItemViewModel: ViewModelBase
     {
-		private int? _x;
+        #region private Members
+        private int? _x;
+        private int? _y;
+        private string? _name;
+        private string? _wayPointType;
+        #endregion
 
-		public int? X
+        #region public Members
+		/// <summary>
+		/// The X Position of the Waypoint
+		/// </summary>
+        public int? X
 		{
 			get { return _x; }
 			set { _x = value; }
 		}
 
-		private int? _y;
-
+		/// <summary>
+		/// The Y Position of the Waypoint
+		/// </summary>
 		public int? Y
 		{
 			get { return _y; }
 			set { _y = value; }
 		}
 
-		private string? _name;
 
+		/// <summary>
+		/// The Name of the waypoint
+		/// </summary>
 		public string? Name
 		{
 			get { return _name; }
 			set { _name = value; }
 		}
+
+		/// <summary>
+		/// The Type of the Waypoint
+		/// </summary>
+		public string? WayPointType
+		{
+			get { return _wayPointType; }
+			set { _wayPointType = value; }
+		}
+		#endregion
 	}
 }

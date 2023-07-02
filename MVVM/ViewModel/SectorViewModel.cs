@@ -2,6 +2,7 @@
 using SpaceTradersApp.MVVM.Model;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,26 +11,42 @@ namespace SpaceTradersApp.MVVM.ViewModel;
 /// <summary>
 /// A class on displaying the sectors
 /// </summary>
-public class SectorViewModel
+public class SectorViewModel : ViewModelBase
 {
+    private SectorListItemViewModel? _selectedSector;
+
     #region public members
     /// <summary>
-    /// The list of available ships
+    /// The list of available Sectors
     /// </summary>
     public ObservableCollection<SectorListItemViewModel>? SectorListItemVMs { get; set; } = new ObservableCollection<SectorListItemViewModel>();
 
-    public ObservableCollection<WaypointListItemViewModel>? WaypointListItemVMs { get; set; } = new ObservableCollection<WaypointListItemViewModel>()
+    public ObservableCollection<WaypointListItemViewModel>? WaypointListItemVMs { get; set; } = new ObservableCollection<WaypointListItemViewModel>();
+
+    public SectorListItemViewModel? SelectedSector
     {
-        new WaypointListItemViewModel()
+        get { return _selectedSector; }
+        set
         {
-            Name = "Best planet Ever",
-            X = 100,
-            Y = 200
+            _selectedSector = value;
+            OnPropertyChanged(nameof(SelectedSector));
         }
-    };
+    }
+
     #endregion
 
-    #region async methods
+    #region commands
+    public IAsyncCommand SelectedItemChangedCommand { get; set; }
+    #endregion
+
+    public SectorViewModel()
+    {
+        SelectedItemChangedCommand = new AsyncCommand(async () =>
+        {
+            await DisplaySector();
+        });
+    }
+
     /// <summary>
     /// Displays the ships of the agent
     /// </summary>
@@ -39,10 +56,10 @@ public class SectorViewModel
         SectorListItemVMs!.Clear();
 
         if (listSystemsResponse == null) { return; }
-        foreach(SystemModel? system in listSystemsResponse!.Data!)
+        foreach (SystemModel? system in listSystemsResponse!.Data!)
         {
             string factionList = "";
-            foreach(var systemFactionModel in system.Factions!)
+            foreach (var systemFactionModel in system.Factions!)
             {
                 factionList += $"|{systemFactionModel.Symbol}";
             }
@@ -54,6 +71,30 @@ public class SectorViewModel
                 WayPoints = system.Waypoints!.Count
             };
             SectorListItemVMs!.Add(sectorListItem);
+        }
+        SelectedSector = SectorListItemVMs[0];
+    }
+
+    #region async methods
+    /// <summary>
+    /// Disploys the waypoints of a system
+    /// </summary>
+    /// <param name="system"></param>
+    internal async Task DisplaySector()
+    {
+        WaypointListItemVMs!.Clear();
+        var system = await IoCContainer.SpaceTradersAPI.getWaypointsAsync(SelectedSector!.SectorName!);
+        if (system == null) { return; }
+        foreach(WaypointModel waypoint in system.Waypoints!)
+        {
+            var waypointVM = new WaypointListItemViewModel()
+            {
+                Name = waypoint.Symbol,
+                X = waypoint.X,
+                Y = waypoint.Y,
+                WayPointType = waypoint.Type
+            };
+            WaypointListItemVMs.Add(waypointVM);
         }
     }
     #endregion

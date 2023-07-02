@@ -96,6 +96,10 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
         return shipModelResponse;
     }
 
+    /// <summary>
+    /// Get a paginated List of Systems
+    /// </summary>
+    /// <returns>A List containing the SystemModels and Pagination Data</returns>
     public async Task<ListSystemsResponse?> getSectorListAsync()
     {
         var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
@@ -111,6 +115,27 @@ class SpaceTradersAPIHelper : ISpaceTradersAPIHelper
 
         return listSystemsResponse;
     }
+
+    /// <summary>
+    /// Get the waypoints and contents of a single System
+    /// </summary>
+    /// <returns>System Data</returns>
+    public async Task<SystemModel?> getWaypointsAsync(string sectorSymbol)
+    {
+        var httpClient = _httpClientFactory.CreateClient("SpaceTradersAPI");
+        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Token);
+        var responseMessage = await httpClient.GetAsync($"Systems/{sectorSymbol}");
+        ListSystemResponse? listSystemResponse = null;
+        if (responseMessage.IsSuccessStatusCode)
+        {
+            var responseString = await responseMessage.Content.ReadAsStringAsync();
+
+            listSystemResponse = JsonSerializer.Deserialize<ListSystemResponse?>(responseString, _jsonSerializerOptions);
+        }
+
+        return listSystemResponse!.Data;
+    }
+
 
     /// <summary>
     /// Creates a new user agent
