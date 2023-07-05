@@ -13,9 +13,17 @@ namespace SpaceTradersApp.MVVM.ViewModel;
 /// </summary>
 public class SectorViewModel : ViewModelBase
 {
+    #region private Members
     private SectorListItemViewModel? _selectedSector;
 
-    #region public members
+    private double _canvasHeight;
+
+    private double _canvasWidth;
+
+
+    #endregion
+
+    #region public Members
     /// <summary>
     /// The list of available Sectors
     /// </summary>
@@ -32,7 +40,29 @@ public class SectorViewModel : ViewModelBase
             OnPropertyChanged(nameof(SelectedSector));
         }
     }
+    public double CanvasWidth
+    {
+        get { 
+            return _canvasWidth; 
+        }
+        set { 
+            _canvasWidth = value;
+            OnPropertyChanged(nameof(CanvasWidth));
+        }
+    }
 
+    public double CanvasHeight
+    {
+        get {
+            System.Diagnostics.Debug.WriteLine($"Get {_canvasHeight} Heigth");
+            return _canvasHeight; 
+        }
+        set { 
+            _canvasHeight = value;
+            System.Diagnostics.Debug.WriteLine($"Set {value} Heigth");
+            OnPropertyChanged(nameof(CanvasHeight));
+        }
+    }
     #endregion
 
     #region commands

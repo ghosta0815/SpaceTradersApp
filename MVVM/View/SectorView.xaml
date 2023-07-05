@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SpaceTradersApp.MVVM.View"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:ap="clr-namespace:SpaceTradersApp.MVVM.View.AttachedProperties"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -63,18 +64,17 @@
         </ListView>
         <!--The display of a System-->
         <Canvas Background="{StaticResource BackgroundHighlightBrush}"
+                ap:ObserveCanvas.Observe="True"
+                ap:ObserveCanvas.ObservableHeight="{Binding CanvasHeight, Mode=OneWayToSource}"
+                ap:ObserveCanvas.ObservableWidth="{Binding CanvasWidth, Mode=OneWayToSource}"
                 x:Name="StarScapeCanvas"
                 Margin="4"
                 ClipToBounds="True"
                 Grid.Column="1"
-                xmlns:Observe.Value ="True"
-                xmlns:ObservableWidth.Value="{Binding ViewPort.Width, Mode=OneWayToSource}"
-                xmlns:ObservableHeight.Value="{Binding ViewPort.Height, Mode=OneWayToSource}"
-                xmlns:MouseClickObserve.Value="True">
-
+                    >
             <!--Displayd Orbitals on the Canvas-->
             <ItemsControl ItemsSource="{Binding WaypointListItemVMs, Mode=TwoWay}"
-                      Panel.ZIndex="100">
+                          Panel.ZIndex="100">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas />
@@ -95,11 +95,11 @@
 
             <!-- The Position Display -->
             <TextBlock Canvas.Bottom="12"
-                   Canvas.Left="12"
-                   Panel.ZIndex="1010"
-                   Foreground="{StaticResource ForegroundVeryLightHighlightBrush}"
-                   FontSize="8"
-                   Text="123123"/>
+                       Canvas.Left="12"
+                       Panel.ZIndex="1010"
+                       Foreground="{StaticResource ForegroundVeryLightHighlightBrush}"
+                       FontSize="8"
+                       Text="123123"/>
             <!--Text="{Binding CursorSpacePosition, Converter={localConverter:CursorSpacePositionConverter}}-->
 
         </Canvas>
